@@ -1,0 +1,39 @@
+Explicatie Implementare
+
+    In aceasta tema , am implementat executia paradigmei Map-Reduce aplicata 
+pe un set de fisiere ce contin numere intregi si ce are ca scop gasirea acelor
+numere care sunt puteri perfecte . Pentru acest lucru am inceput cu o 
+structura ce contine id-ul thread-ului respectiv , numarul de reduceri , 
+o lista de lista in care voi prelucra cu ajutorul mapperilor numerele
+din fisiere si lista de fisiere folosita , de asemenea de mapperi . 
+
+    Atat thread-urile de tip map cat si cele reduce le creez simultan , in 
+acelasi timp . Pentru thread-urile de tip map , am creat o functie in care
+fiecare thread isi alege un fisier din care citeste si pentru a avea fisier
+unic per thread am folosit un mutex . Am realizat citirea si adaugarea intr-un
+vector de intregi de numere , atata timp cat mai sunt fisiere de procesat . 
+Apoi , tot cu ajutorul mapperilor am verificat ce numere sunt puteri 
+perfecte , folosindu-ma de algoritmul binary search pentru a avea un timp
+de rulare mult mai scurt , singura modificare fata de cel clasic fiind doar 
+o mica verificare daca mijlocul ridicat la puterea data este egal cu numarul
+dat ca parametru functiei. In final , adaug in lista , vectorii obtinuti la
+pasul anterior . Pentru reduceri , am creat fisierele de output , am format 
+listele finale si la final am numarat cate elemente unice fac parte din lista 
+si le-am scris in fisierele de iesire . 
+
+    Pe langa cele de mai sus , am mai creat o functie de initializare a 
+structurii folosite , cu argumentele necesare implementarii . Pentru 
+tratarea erorilor/cazurilor speciale am folosit macro-ul DIE , preluat
+din lab-urile/temele de la PCOM. Problemele care mi-au ingreunat tema 
+au fost legate de niste pointeri , in special atunci cand trebuia sa iau
+pentru reduceri listele formate de mapperi . O alta problema a fost atunci
+cand am incarcat tema pe moodle si la o testare automata imi luam segmentation
+fault , dar am rezolvat-o stergand "\n" de la fiecare numar atunci cand il 
+citeam . 
+
+    Am folosit structura de vector din STL pentru un lucru mai usor , motiv
+pentru care am si ales o implementare in C++ . 
+
+Link-uri si referinte:
+* https://en.wikipedia.org/wiki/MapReduce
+* http://static.googleusercontent.com/media/research.google.com/en//archive/mapreduce-osdi04.pdf
